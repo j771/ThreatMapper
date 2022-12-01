@@ -162,6 +162,7 @@ def run_node_task(action, node_action_details, scheduler_id=None, cron_expr=None
                                 continue
                         datetime_now = datetime.now()
                         scan_id = image_name_with_tag + "_" + datetime_now.strftime("%Y-%m-%dT%H:%M:%S") + ".000"
+                        # fetch image id of registry image here
                         body = {
                             "masked": "false", "type": constants.CVE_SCAN_LOGS_ES_TYPE, "scan_id": scan_id, "host": "",
                             "@timestamp": datetime_now.strftime("%Y-%m-%dT%H:%M:%S.%fZ"), "cve_scan_message": "",
