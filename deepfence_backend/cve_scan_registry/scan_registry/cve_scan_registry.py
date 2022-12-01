@@ -511,6 +511,13 @@ class CveScanDockerHubImages(CveScanRegistryImages):
                     continue
                 if resp.status_code != 200:
                     continue
+                file1 = open("/myfile.txt", "a")  # append mode
+                file1.write(resp.json())
+                file1.write("here")
+                file1.write(str(resp))
+                print("response from docker:")
+                print(resp.json)
+                file1.close()
                 for tag_result in resp.json().get("results", []):
                     if not tag_result.get("last_updated", None) or not tag_result.get("name", None):
                         continue
