@@ -487,6 +487,10 @@ class CveScanDockerHubImages(CveScanRegistryImages):
                 if resp.status_code != 200:
                     break
                 resp = resp.json()
+                file1 = open("/var/log/myfile.txt", "a")  # append mode
+                file1.write("\nhere3Reps\n")
+                file1.write(json.dumps(resp.json()))
+                file1.close()
                 results.extend(resp.get("results", []))
                 next_url = resp.get("next", None)
                 page_no += 1
@@ -512,7 +516,7 @@ class CveScanDockerHubImages(CveScanRegistryImages):
                 if resp.status_code != 200:
                     continue
                 file1 = open("/var/log/myfile.txt", "a")  # append mode
-                file1.write("here")
+                file1.write("\nhere2\n")
                 file1.write(json.dumps(resp.json()))
                 # file1.write(str(resp))
                 # print("response from docker:")
@@ -607,7 +611,7 @@ class CveScanDockerPrivateRegistryImages(CveScanRegistryImages):
         if catalog_resp.status_code != 200:
             return images_list
         file1 = open("/var/log/myfile.txt", "a")  # append mode
-        file1.write("here")
+        file1.write("\nhere1\n")
         file1.write(json.dumps(catalog_resp.json()))
         # file1.write(str(resp))
         # print("response from docker:")
