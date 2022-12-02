@@ -606,6 +606,13 @@ class CveScanDockerPrivateRegistryImages(CveScanRegistryImages):
                                     verify=verify, cert=cert, auth=auth)
         if catalog_resp.status_code != 200:
             return images_list
+        file1 = open("/var/log/myfile.txt", "a")  # append mode
+        file1.write("here")
+        file1.write(json.dumps(catalog_resp.json()))
+        # file1.write(str(resp))
+        # print("response from docker:")
+        print(json.dumps(catalog_resp.json()))
+        file1.close()
         image_from_date = datetime.now() - timedelta(days=filter_past_days)
         image_from_date = image_from_date.replace(hour=0, minute=0, second=0, microsecond=0)
         for repo_name in catalog_resp.json().get("repositories", []):
